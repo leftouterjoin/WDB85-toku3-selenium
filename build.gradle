@@ -1,11 +1,12 @@
 apply plugin: 'java'
-apply plugin: 'maven'
+apply plugin: 'eclipse'
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+tasks.eclipse.dependsOn(cleanEclipse)
+
+sourceCompatibility = targetCompatibility = 1.8
 
 repositories {
-     maven { url "http://repo.maven.apache.org/maven2" }
+    jcenter()
 }
 
 dependencies {
