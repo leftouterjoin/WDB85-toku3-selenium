@@ -13,24 +13,50 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import io.github.bonigarcia.wdm.Architecture;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
+import io.github.bonigarcia.wdm.InternetExplorerDriverManager;
 
 public class PocChromeWithWdmTest {
     private WebDriver driver;
+    private static final int TARGET_BROWSER = 2;
     
     @BeforeClass
     public static void setupClass() {
     	System.setProperty("http.proxyHost", "10.116.15.154");
     	System.setProperty("http.proxyPort", "3128");
-    	ChromeDriverManager.getInstance().setup();
+    	switch (TARGET_BROWSER) {
+    	case 0:
+    		break;
+    	case 1:
+        	ChromeDriverManager.getInstance().setup();
+    		break;
+    	case 2:
+//    		new InternetExplorerDriverManager().setup(Architecture.x64);
+        	InternetExplorerDriverManager.getInstance().setup(Architecture.x64, "2.53.0");
+    		break;
+    	}
     }
 
     @Before
     public void setUp() {
-        driver = new ChromeDriver();
+    	switch (TARGET_BROWSER) {
+    	case 0:
+    		driver = new FirefoxDriver();
+    		break;
+    	case 1:
+        	ChromeDriverManager.getInstance().setup();
+            driver = new ChromeDriver();
+    		break;
+    	case 2:
+            driver = new InternetExplorerDriver();
+    		break;
+    	}
     }
 
     @After
