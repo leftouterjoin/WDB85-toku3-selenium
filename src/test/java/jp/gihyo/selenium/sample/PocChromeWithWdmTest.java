@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
 import org.junit.BeforeClass;
@@ -13,6 +14,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -50,6 +53,8 @@ public class PocChromeWithWdmTest {
 	public PocChromeWithWdmTest(Class<? extends WebDriver> clazz)
 			throws ReflectiveOperationException {
 		this.driver = clazz.newInstance();
+		this.driver.manage().window().setSize(new Dimension(800, 600));   // For Demo.
+		this.driver.manage().window().setPosition(new Point(50, 50));   // For Demo.
 	}
 
 	@After
@@ -59,7 +64,7 @@ public class PocChromeWithWdmTest {
 	}
 
 	@Test
-	public void testSample() {
+	public void testSample() throws InterruptedException {
 		// サンプルページを開く
 		driver.get("http://wdpress.github.io/webdb-selenium-sample/");
 
@@ -68,8 +73,10 @@ public class PocChromeWithWdmTest {
 		WebElement passwordInput = driver.findElement(By.id("password"));
 
 		// ユーザー名とパスワードを入力する
+		TimeUnit.SECONDS.sleep(1);   // For Demo.
 		usernameInput.sendKeys("user1");
 		passwordInput.sendKeys("p@ssword");
+		TimeUnit.SECONDS.sleep(1);   // For Demo.
 
 		// ログインボタン要素を取得する
 		WebElement loginButton = driver.findElement(By.id("login"));
@@ -89,7 +96,9 @@ public class PocChromeWithWdmTest {
 		WebElement commentInput = driver.findElement(By.id("comment-text"));
 
 		// コメントを入力する
+		TimeUnit.SECONDS.sleep(1);   // For Demo.
 		commentInput.sendKeys("Hello World!");
+		TimeUnit.SECONDS.sleep(1);   // For Demo.
 
 		// 投稿ボタン要素を取得する
 		WebElement postButton = driver.findElement(By.id("post"));
@@ -104,5 +113,6 @@ public class PocChromeWithWdmTest {
 		// コメントが投稿されていることをテストする
 		assertThat(comments.size(), is(1));
 		assertThat(comments.get(0).getText(), is("Hello World!"));
+		TimeUnit.SECONDS.sleep(1);   // For Demo.
 	}
 }
