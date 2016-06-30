@@ -14,6 +14,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
@@ -21,6 +22,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -55,6 +57,11 @@ public class PocMultiBrowserWithWdmTest {
 		this.driver = clazz.newInstance();
 		this.driver.manage().window().setSize(new Dimension(800, 600));   // For Demo.
 		this.driver.manage().window().setPosition(new Point(50, 50));   // For Demo.
+		Capabilities cap = ((RemoteWebDriver)this.driver).getCapabilities();
+//		System.out.println(cap.getBrowserName());
+//		System.out.println(cap.getPlatform().toString());
+//		System.out.println(cap.getVersion().toString());
+		System.out.println("★バージョン情報等: " + cap.toString());
 	}
 
 	@After
