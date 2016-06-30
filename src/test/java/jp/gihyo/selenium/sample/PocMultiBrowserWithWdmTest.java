@@ -29,7 +29,7 @@ import io.github.bonigarcia.wdm.ChromeDriverManager;
 import io.github.bonigarcia.wdm.InternetExplorerDriverManager;
 
 @RunWith(Parameterized.class)
-public class PocChromeWithWdmTest {
+public class PocMultiBrowserWithWdmTest {
 	private WebDriver driver;
 
 	@Parameters(name = "{0}")
@@ -50,7 +50,7 @@ public class PocChromeWithWdmTest {
 				"2.53.0");
 	}
 
-	public PocChromeWithWdmTest(Class<? extends WebDriver> clazz)
+	public PocMultiBrowserWithWdmTest(Class<? extends WebDriver> clazz)
 			throws ReflectiveOperationException {
 		this.driver = clazz.newInstance();
 		this.driver.manage().window().setSize(new Dimension(800, 600));   // For Demo.
